@@ -123,11 +123,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CLine.cpp" />
+    <ClCompile Include="CPoint.cpp" />
+    <ClCompile Include="CThreePoint.cpp" />
     <ClCompile Include="lab1\lab1_2.cpp" />
     <ClCompile Include="lab1\lab1_3.cpp" />
     <ClCompile Include="lab1\lab1_4.cpp" />
+    <ClCompile Include="lab1\lab1_5.cpp" />
     <ClCompile Include="lab1\sum.cpp" />
-    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CLine.h" />
+    <ClInclude Include="CPoint.h" />
+    <ClInclude Include="CThreePoint.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

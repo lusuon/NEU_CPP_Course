@@ -1,0 +1,110 @@
+#include "CPoint.h"
+#include <iostream>
+using namespace std;
+
+//todo:
+//分析对静态成员的调用和一般成员的调用方式有什么不同。
+/*
+（1）完成该类中各成员函数的定义
+	【OK】注意对静态成员nCount的操作，使其能够正确表示程序中点的个数
+	【OK】编完该类后，要在main()函数中进行测试，分别定义CPoint类的对象、指针、引用，对各成员函数进行调用。
+*/
+/*
+	（2）
+	以成员函数的方式，重载CPoint类的“+”运算符，返回的CPoint类对象的横纵坐标值分别等于原两点的横纵坐标值之和；
+		以成员函数方式重载的“+”操作符的原型为：CPoint CPoint::operator+ (CPoint pt);
+	以全局函数的方式重载CPoint类的“-”运算符，返回的CPoint类对象的横纵坐标值分别等于原两点的横纵坐标值之差。
+		以全局函数方式重载的“-”操作符的原型为：CPoint operator- (CPoint pt1, CPoint pt2);
+	分析以成员函数方式和全局函数方式重载运行符的异同点
+	(3)
+	对于题目1中的CPoint类，重载“>>”运算符使得像cin等输入流对象能够写CPoint类对象
+		重载的“>>”操作符的原型为：istream& operator>>(istream&, CPoint&);
+	再重载“<<”运算符使得像cout等输出流对象能够输出CPoint类对象。
+		重载的“<<”操作符的原型为：ostream& operator>>(ostream&, CPoint);
+	思考一下，重载的“>>”操作符和“<<”操作符能否作为CPoint类的成员函数来实现。
+*/
+
+int CPoint::nCount = 0; // 为静态成员变量nCount分配内存
+
+CPoint::CPoint(int px, int py)
+{
+	x = px;
+	y = py;
+	nCount++;
+	cout << endl << "A new point created.";
+	ShowPoint();
+	cout << "nCount: " << nCount << endl;
+}
+
+CPoint::CPoint(CPoint &cp)
+{
+	x = cp.GetX();
+	y = cp.GetY();
+	nCount++;
+}
+
+CPoint::~CPoint()
+{
+	cout << endl << "The point following was destroyed." << endl;
+	ShowPoint();
+	nCount--;
+	cout << "nCount: " << nCount << endl;
+}
+
+int CPoint::GetX()
+{
+	return x;
+}
+
+int CPoint::GetY()
+{
+	return y;
+}
+
+void CPoint::SetX(int new_x)
+{
+	x = new_x;
+}
+
+void CPoint::SetY(int new_y)
+{
+	y = new_y;
+}
+
+void CPoint::ShowPoint()
+{
+	cout << "(" << this->GetX() << "," << this->GetY() << ")" << endl;
+}
+
+
+/*
+
+void main()
+{
+	CPoint cp(1,1);
+	CPoint* ptr = &cp;
+	CPoint& ref = cp;
+	// 对所有方法进行调用
+	// 使用引用
+	cout << endl << "using reference to call." << endl;
+	cout << "using getter to show x and y: " << ref.GetX() << " " << ref.GetY() << endl;
+	cout << "using reference to set and show." << endl;
+	ref.SetX(0);
+	ref.SetY(0);
+	ref.ShowPoint();
+	// 使用对象本身
+	cout << endl << "using object itself to call." << endl;
+	cout << "using getter to show x and y: " << cp.GetX() << " " << cp.GetY() << endl;
+	cout << "using object itself to set and show." << endl;
+	cp.SetX(114);
+	cp.SetY(114);
+	cp.ShowPoint();
+	// 使用对象指针
+	cout << endl << "using pointer to call." << endl;
+	cout << "using getter to show x and y: " << ptr->GetX() << " " << ptr->GetY() << endl;
+	cout << "using pointer to set and show." << endl;
+	ptr->SetX(514);
+	ptr->SetY(514);
+	ptr->ShowPoint();
+}
+*/

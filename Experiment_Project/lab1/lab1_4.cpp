@@ -24,8 +24,6 @@ double* transcope(double *m)
 	}
 	return *m;
 }
-*/
-
 void main() {
 	double** m = new double*[3]; 
 	for (int i = 0; i < 3; i++) {
@@ -48,3 +46,4 @@ void main() {
 		cout << endl;
 	}
 }
+*/
