@@ -11,22 +11,35 @@ using namespace std;
 		使用输出流对象输出数据到文件和屏幕。
 */
 
+static string content = "";
+
 void read(string path)
 {
-	char data[100];
-	ifstream in(path);
+	char buffer[100];
+	int count = 1;
+	ifstream in(path, std::ios::binary);
 	while (!in.eof())
 	{
-
+		in.getline(buffer, 100);
+		count++;
+		// 接收流
+		string line(&buffer[0], &buffer[strlen(buffer)]);
+		line = count + " " + line;
+		content += line;
+		cout << line << endl;
 	}
+	in.close();
 }
 
 void write(string path)
 {
-	ofstream out(path);
+	ofstream out(path, std::ios::binary);
+	out << content;
+	out.close();
+	content = "";
 }
 
-/*
+
 void main(int argc, char* argv[])
 {
 	string read_tar = argv[1];
@@ -34,4 +47,3 @@ void main(int argc, char* argv[])
 	read(read_tar);
 	write(write_tar);
 }
-*/
