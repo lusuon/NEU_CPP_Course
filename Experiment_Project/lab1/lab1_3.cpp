@@ -22,13 +22,14 @@ double* transcope(double (&m)[3][3])
 	}
 	return *m;
 }
+
 /*
 void main() {
 	double *t = transcope(test_m);
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
-		{	
+		{
 			cout << *t << " ";
 			t++;
 		}
@@ -36,3 +37,4 @@ void main() {
 	}
 }
 */
+

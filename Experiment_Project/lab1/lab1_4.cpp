@@ -2,30 +2,21 @@
 
 using namespace std;
 
-
-
-/*
-
-double* transcope(double *m)
+int** transcope(int** m)
 {
+	int b[3][3] = { 0 };
+	memcpy(b, m, sizeof(b));
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			double temp;
-			if (i < j)
-			{
-				//swap(m[i][j], m[j][i]);
-				temp = m[i][j];
-				m[i][j] = m[j][i];
-				m[j][i] = temp;
-			}
+
 		}
 	}
-	return *m;
+	return b;
 }
 void main() {
-	double** m = new double*[3]; 
+	double** m = new double* [3];
 	for (int i = 0; i < 3; i++) {
 		double* new_row = new double[3];
 		for (int j = 0; j < 3; j++) {
@@ -46,4 +37,3 @@ void main() {
 		cout << endl;
 	}
 }
-*/

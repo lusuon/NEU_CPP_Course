@@ -26,6 +26,7 @@ void write(string path)
 	ofstream out(path);
 }
 
+/*
 void main(int argc, char* argv[])
 {
 	string read_tar = argv[1];
@@ -33,3 +34,4 @@ void main(int argc, char* argv[])
 	read(read_tar);
 	write(write_tar);
 }
+*/

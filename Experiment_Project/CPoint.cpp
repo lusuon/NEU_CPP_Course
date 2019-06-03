@@ -26,10 +26,10 @@ using namespace std;
 
 int CPoint::nCount = 0; // 为静态成员变量nCount分配内存
 
-CPoint::CPoint(int px, int py)
+CPoint::CPoint(int px, int py) :x(px), y(py)
 {
-	x = px;
-	y = py;
+	//x = px;
+	//y = py;
 	nCount++;
 	cout << endl << "A new point created.";
 	ShowPoint();
@@ -38,8 +38,6 @@ CPoint::CPoint(int px, int py)
 
 CPoint::CPoint(CPoint &cp)
 {
-	x = cp.GetX();
-	y = cp.GetY();
 	nCount++;
 }
 
