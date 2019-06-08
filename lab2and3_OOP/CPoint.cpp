@@ -1,5 +1,6 @@
 #include "CPoint.h"
 #include <iostream>
+
 using namespace std;
 
 //todo:
@@ -16,6 +17,8 @@ using namespace std;
 	以全局函数的方式重载CPoint类的“-”运算符，返回的CPoint类对象的横纵坐标值分别等于原两点的横纵坐标值之差。
 		以全局函数方式重载的“-”操作符的原型为：CPoint operator- (CPoint pt1, CPoint pt2);
 	分析以成员函数方式和全局函数方式重载运行符的异同点
+*/
+/*
 	(3)
 	对于题目1中的CPoint类，重载“>>”运算符使得像cin等输入流对象能够写CPoint类对象
 		重载的“>>”操作符的原型为：istream& operator>>(istream&, CPoint&);
@@ -24,7 +27,7 @@ using namespace std;
 	思考一下，重载的“>>”操作符和“<<”操作符能否作为CPoint类的成员函数来实现。
 */
 
-int CPoint::nCount = 0; // 为静态成员变量nCount分配内存
+int CPoint::nCount = 0; // 为静态成员变量nCount分配内存、初始化
 
 CPoint::CPoint(int px, int py) :x(px), y(py)
 {
@@ -49,22 +52,22 @@ CPoint::~CPoint()
 	cout << "nCount: " << nCount << endl;
 }
 
-int CPoint::GetX()
+int inline CPoint::GetX()const
 {
 	return x;
 }
 
-int CPoint::GetY()
+int inline CPoint::GetY()const
 {
 	return y;
 }
 
-void CPoint::SetX(int new_x)
+void inline CPoint::SetX(int new_x)
 {
 	x = new_x;
 }
 
-void CPoint::SetY(int new_y)
+void inline CPoint::SetY(int new_y)
 {
 	y = new_y;
 }
@@ -72,6 +75,45 @@ void CPoint::SetY(int new_y)
 void CPoint::ShowPoint()
 {
 	cout << "(" << this->GetX() << "," << this->GetY() << ")" << endl;
+}
+
+void CPoint::ShowCount()
+{
+	cout << nCount;
+}
+
+// 重载 + 运算符
+CPoint CPoint::operator+(CPoint cp)
+{
+	int new_x = x + cp.GetX();
+	int new_y = y + cp.GetY();
+	CPoint added(new_x, new_y);
+	return added;
+}
+
+CPoint operator-(CPoint p1, CPoint p2)
+{
+	int new_x = p1.x - p2.x;
+	int new_y = p1.y - p2.y;
+	CPoint cp(new_x, new_y);
+	return cp;
+}
+
+istream& operator>>(istream& is, CPoint& cp)
+{
+	is >> cp.x >> cp.y;
+	//int new_x;
+	//int new_y;
+	//is >> new_x >> new_y;
+	//cp.SetX(new_x);
+	//cp.SetY(new_y);
+	return is;
+}
+
+ostream& operator<<(ostream& os, CPoint& cp)
+{
+	cout << "(" << cp.GetX() << "," << cp.GetY() << ")"<<endl;
+	return os;
 }
 
 

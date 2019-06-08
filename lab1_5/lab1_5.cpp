@@ -1,5 +1,6 @@
 # include<iostream>
 # include<fstream>
+# include<string>
 using namespace std;
 
 /*
@@ -12,38 +13,47 @@ using namespace std;
 */
 
 static string content = "";
+static string toReadPath = "C:\\Users\\Jackson Ma\\Desktop\\toRead.bin";
+static string toWritePath = "C:\\Users\\Jackson Ma\\Desktop\\toWrite.bin";
 
 void read(string path)
 {
+	content = "";
 	char buffer[100];
-	int count = 1;
-	ifstream in(path, std::ios::binary);
+	int count = 0;
+	ifstream in(path,std::ios::binary);
 	while (!in.eof())
 	{
 		in.getline(buffer, 100);
 		count++;
 		// Ω” ’¡˜
 		string line(&buffer[0], &buffer[strlen(buffer)]);
-		line = count + " " + line;
+		line = to_string(count) + " " + line+"\n";
 		content += line;
 		cout << line << endl;
 	}
 	in.close();
 }
 
-void write(string path)
+void write(string text,string path)
 {
-	ofstream out(path, std::ios::binary);
-	out << content;
+	ofstream out(path,std::ios::binary);
+	if (out.is_open())
+	{
+		out << text;
+	}
 	out.close();
-	content = "";
 }
 
+/*
 
-void main(int argc, char* argv[])
+//int argc, char* argv[]
+void main()
 {
-	string read_tar = argv[1];
-	string write_tar = argv[2];
+	string read_tar = toReadPath;//argv[1];
+	string write_tar = toWritePath;//argv[2];
 	read(read_tar);
-	write(write_tar);
+	write(content,write_tar);
 }
+
+*/

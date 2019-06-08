@@ -22,9 +22,7 @@ int maxl(int a, int b, int c)
 	return maxl(a, b) >= maxl(a, c) ? maxl(a, b) : maxl(a,c);
 }
 
-/*
-
-void main()
+void test_lab_1_2()
 {
 	int a = 1;
 	int b = 2;
@@ -38,5 +36,4 @@ void main()
 	cout << "input: 1.1, 2.2, 3.3 " << "for 1.1, 2.2 and 3.3 , the bigger is " << maxl(d, e, f) << endl;
 }
 
-*/
 

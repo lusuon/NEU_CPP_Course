@@ -20,9 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{8B69C648-C9FF-4F80-B3D7-75EC1FE37205}</ProjectGuid>
-    <RootNamespace>ExperimentProject</RootNamespace>
+    <ProjectGuid>{88EB60F7-326B-4FE9-B45F-664425A11443}</ProjectGuid>
+    <RootNamespace>lab11</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>baseform1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -123,19 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CLine.cpp" />
-    <ClCompile Include="CPoint.cpp" />
-    <ClCompile Include="CThreePoint.cpp" />
-    <ClCompile Include="lab1\lab1_2.cpp" />
-    <ClCompile Include="lab1\lab1_3.cpp" />
-    <ClCompile Include="lab1\lab1_4.cpp" />
-    <ClCompile Include="lab1\lab1_5.cpp" />
-    <ClCompile Include="lab1\sum.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CLine.h" />
-    <ClInclude Include="CPoint.h" />
-    <ClInclude Include="CThreePoint.h" />
+    <ClCompile Include="sum.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

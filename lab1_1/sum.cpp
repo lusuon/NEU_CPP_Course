@@ -2,7 +2,12 @@
 using namespace std;
 
 int add(int a,int b);
-/*
+int add(int a, int b)
+{
+	int c;
+	c=a + b;
+	return c;
+}
 
 int main()
 {
@@ -13,11 +18,4 @@ int main()
 	sum = add(x, y);
 	cout << "The sum is£º" << sum << endl;
 	return 0;
-}
-*/
-int add(int a, int b)
-{
-	int c;
-	c=a + b;
-	return c;
 }
