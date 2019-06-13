@@ -18,24 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DecisionTree.h" />
-    <ClInclude Include="OptStruct.h" />
-    <ClInclude Include="SVM.h" />
-    <ClInclude Include="TreeNode.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="DecisionTree.cpp" />
-    <ClCompile Include="OptStruct.cpp" />
-    <ClCompile Include="SVM.cpp" />
-    <ClCompile Include="TreeNode.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{D4FCD0CD-107B-4156-A018-81DE21451963}</ProjectGuid>
-    <RootNamespace>FinalHomework</RootNamespace>
+    <ProjectGuid>{1D229B8E-0001-46CB-A3B4-64E127BAD460}</ProjectGuid>
+    <RootNamespace>lab3Vehicle</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>finalHomework</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -82,9 +69,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>../eigen-eigen-323c052e1731;$(IncludePath)</IncludePath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -137,6 +122,20 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Bicycle.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Motorcar.h" />
+    <ClInclude Include="Motorcycle.h" />
+    <ClInclude Include="Vehicle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Bicycle.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Motorcar.cpp" />
+    <ClCompile Include="Motorcycle.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

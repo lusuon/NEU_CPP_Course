@@ -5,12 +5,13 @@ using namespace std;
 
 class CPoint
 {
-private:
+protected:
 	int x, y;
 	static int nCount;   // nCount用于保存点的个数
 public:
 	CPoint(int px = 0, int py = 0);
 	CPoint(CPoint&);
+	CPoint(const CPoint&);
 	~CPoint();
 	int GetX()const;
 	int GetY()const;

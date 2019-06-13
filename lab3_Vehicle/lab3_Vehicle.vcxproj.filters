@@ -15,30 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SVM.h">
+    <ClInclude Include="Bicycle.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="OptStruct.h">
+    <ClInclude Include="Motorcar.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DecisionTree.h">
+    <ClInclude Include="Motorcycle.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TreeNode.h">
+    <ClInclude Include="Vehicle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SVM.cpp">
+    <ClCompile Include="Bicycle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="OptStruct.cpp">
+    <ClCompile Include="Motorcar.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="DecisionTree.cpp">
+    <ClCompile Include="Motorcycle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TreeNode.cpp">
+    <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

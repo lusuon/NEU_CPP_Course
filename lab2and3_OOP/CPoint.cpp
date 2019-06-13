@@ -11,7 +11,7 @@ using namespace std;
 	【OK】编完该类后，要在main()函数中进行测试，分别定义CPoint类的对象、指针、引用，对各成员函数进行调用。
 */
 /*
-	（2）
+	（2）【OK】
 	以成员函数的方式，重载CPoint类的“+”运算符，返回的CPoint类对象的横纵坐标值分别等于原两点的横纵坐标值之和；
 		以成员函数方式重载的“+”操作符的原型为：CPoint CPoint::operator+ (CPoint pt);
 	以全局函数的方式重载CPoint类的“-”运算符，返回的CPoint类对象的横纵坐标值分别等于原两点的横纵坐标值之差。
@@ -24,7 +24,7 @@ using namespace std;
 		重载的“>>”操作符的原型为：istream& operator>>(istream&, CPoint&);
 	再重载“<<”运算符使得像cout等输出流对象能够输出CPoint类对象。
 		重载的“<<”操作符的原型为：ostream& operator>>(ostream&, CPoint);
-	思考一下，重载的“>>”操作符和“<<”操作符能否作为CPoint类的成员函数来实现。
+	思考一下，重载的“>>”操作符和“<<”操作符能否作为CPoint类的成员函数来实现。不能，否则需要把CPoint类放前面；
 */
 
 int CPoint::nCount = 0; // 为静态成员变量nCount分配内存、初始化
@@ -34,22 +34,22 @@ CPoint::CPoint(int px, int py) :x(px), y(py)
 	//x = px;
 	//y = py;
 	nCount++;
-	cout << endl << "A new point created.";
+	//cout << endl << "A new point created.";
 	ShowPoint();
-	cout << "nCount: " << nCount << endl;
+	//cout << "nCount: " << nCount << endl;
 }
 
-CPoint::CPoint(CPoint &cp)
+CPoint::CPoint(CPoint &cp):x(cp.x),y(cp.y)
 {
 	nCount++;
 }
 
 CPoint::~CPoint()
 {
-	cout << endl << "The point following was destroyed." << endl;
+	//cout << endl << "The point following was destroyed." << endl;
 	ShowPoint();
 	nCount--;
-	cout << "nCount: " << nCount << endl;
+	//cout << "nCount: " << nCount << endl;
 }
 
 int inline CPoint::GetX()const
@@ -83,10 +83,12 @@ void CPoint::ShowCount()
 }
 
 // 重载 + 运算符
-CPoint CPoint::operator+(CPoint cp)
+CPoint CPoint::operator+(CPoint cp_another)
 {
-	int new_x = x + cp.GetX();
-	int new_y = y + cp.GetY();
+	cout << "this, x is:" << x << ", y is:" << y << endl;
+	cout << "another, x is:" << cp_another.x << ", y is:" << cp_another.y << endl;
+	int new_x = x + cp_another.x;
+	int new_y = y + cp_another.y;
 	CPoint added(new_x, new_y);
 	return added;
 }
@@ -117,11 +119,12 @@ ostream& operator<<(ostream& os, CPoint& cp)
 }
 
 
-/*
 
 void main()
 {
-	CPoint cp(1,1);
+	CPoint cp(1, 1);
+	CPoint cp2(2, 3);
+	/*
 	CPoint* ptr = &cp;
 	CPoint& ref = cp;
 	// 对所有方法进行调用
@@ -146,5 +149,10 @@ void main()
 	ptr->SetX(514);
 	ptr->SetY(514);
 	ptr->ShowPoint();
-}
-*/
+	*/
+	cout << "start adding two points" << endl;
+	cout << cp;
+	CPoint cp3 = (cp + cp2);
+	cout << cp << "add with" << cp2 << "equals" << cp3 << "created";
+
+	}

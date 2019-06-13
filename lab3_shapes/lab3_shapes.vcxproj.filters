@@ -15,31 +15,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SVM.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="OptStruct.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DecisionTree.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TreeNode.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    <ClCompile Include="..\lab2and3_OOP\Shape.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lab2and3_OOP\ShapeLine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lab2and3_OOP\CCircle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CRectangle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SVM.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="OptStruct.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DecisionTree.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="TreeNode.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    <ClInclude Include="..\lab2and3_OOP\Shape.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lab2and3_OOP\ShapeLine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lab2and3_OOP\CCircle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CRectangle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
