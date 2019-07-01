@@ -316,6 +316,22 @@ vector<vector<double>> Classifier::classify(vector<vector<double>> raw)
 	return raw;
 }
 
+void Classifier::hessian()
+{
+	for(int i = 0;i<N;i++)
+		for (int j = 0; j < N; j++)
+		{
+			double h = 0;
+			for (int row = 0; row < M; row++)
+			{
+				double xi = data[row * (N + 1) + i]; // 第row行的第i个分量
+				double xj = data[row * (N + 1) + j]; // 第row行的第i个分量
+				h -= xi * xj * sigmoid(row) * (1 - sigmoid(row));
+			}
+			hessian[i * N + j] = h;
+		}
+}
+
 double Classifier::check(vector<vector<double>> origin_labels, vector<vector<double>> classified_labels)
 {
 	//假定标签为n*1的二维向量
@@ -328,4 +344,27 @@ double Classifier::check(vector<vector<double>> origin_labels, vector<vector<dou
 		if (o == c) correct++;
 	}
 	return correct / rows ;
+}
+
+void Classifier::newtonTrain()
+{
+	for (int i = 0; i < N; i++) weights[i] = 0;
+	double* hg = new double[N];
+	double* in = new double[N*N];
+
+	for (int p = 0; p < PASS; p++)
+	{
+		Gradient();
+		Hseeian();
+		Inverse(hessian, in.N);
+		mulyiply(in, nabla, hg, N, N, 1); //H的逆*G
+		for(int i = 0 ;i<N;i++)
+		{
+			weights[i] -= hg[i];
+		}
+
+	}
+
+	delete [] hg;
+	delete [] in;
 }

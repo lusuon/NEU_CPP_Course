@@ -3,17 +3,11 @@
 using namespace std;
 
 
-CRectangle::CRectangle()
+CRectangle::CRectangle(double l, double w, ColorType c):length(l),weight(w),Shape(c)
 {
 }
-
-
-CRectangle::~CRectangle()
-{
-}
-
 
 void CRectangle::draw()
 {
-	cout << " This is a rectangle!" << endl;
+	cout << "A rectangle drew." << endl;
 }

@@ -123,16 +123,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\lab2and3_OOP\Shape.cpp" />
-    <ClCompile Include="..\lab2and3_OOP\CCircle.cpp" />
-    <ClCompile Include="..\lab2and3_OOP\ShapeLine.cpp" />
+    <ClCompile Include="CCircle.cpp" />
     <ClCompile Include="CRectangle.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="ShapeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\lab2and3_OOP\Shape.h" />
-    <ClInclude Include="..\lab2and3_OOP\CCircle.h" />
-    <ClInclude Include="..\lab2and3_OOP\ShapeLine.h" />
+    <ClInclude Include="CCircle.h" />
     <ClInclude Include="CRectangle.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="ShapeLine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

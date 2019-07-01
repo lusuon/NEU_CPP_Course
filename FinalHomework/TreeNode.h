@@ -16,5 +16,6 @@ public:
 	~TreeNode();
 	friend ostream& operator<<(ostream&, TreeNode);
 	map<string, TreeNode*> getChilds();
+	string getDecision();
 };
 

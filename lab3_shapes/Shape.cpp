@@ -1,11 +1,6 @@
 #include "Shape.h"
-
-
-
-Shape::Shape()
-{
-}
-
+#include <iostream>
+using namespace std;
 
 Shape::~Shape()
 {
@@ -17,5 +12,6 @@ Shape::Shape(ColorType c):color(c)
 
 void Shape::draw()
 {
-	// Do nothing.
+	// Do nothing
+	cout << "Can not draw a shape." << endl;
 }

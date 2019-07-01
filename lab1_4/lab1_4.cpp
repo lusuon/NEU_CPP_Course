@@ -27,7 +27,6 @@ void output(int** m)
 	}
 }
 
-/*
 void main() {
 	int** m = new int* [3];
 	for (int i = 0; i < 3; i++) {
@@ -37,8 +36,9 @@ void main() {
 		}
 		m[i] = new_row;
 	}
+	cout << "The original matrix:" << endl;
+	output(m);
 	transcope(m);
-
+	cout << "The transcoped matrix:" << endl;
 	output(m);
 }
-*/

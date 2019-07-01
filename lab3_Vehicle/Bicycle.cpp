@@ -9,6 +9,8 @@ Bicycle::Bicycle()
 
 Bicycle::Bicycle(double ms, double w, double h) :Vehicle(ms, w), height(h)
 {
+
+	cout << "A Bicycle created." << endl;
 }
 
 

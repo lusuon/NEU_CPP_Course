@@ -21,8 +21,7 @@ public:
 	Vehicle();
 	Vehicle(double ms, double w);
 	~Vehicle();
-	virtual void run();
-	virtual void stop();
-	void showDetails();
+	virtual void run() = 0;
+	virtual void stop() = 0;
 };
 

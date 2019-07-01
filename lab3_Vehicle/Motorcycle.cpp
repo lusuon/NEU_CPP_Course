@@ -9,6 +9,8 @@ Motorcycle::Motorcycle()
 
 Motorcycle::Motorcycle(double ms, double w, double h, int sn):Motorcar(ms,w,sn),Bicycle(ms,w,h)
 {
+
+	cout << "A motorCycle created." << endl;
 }
 
 

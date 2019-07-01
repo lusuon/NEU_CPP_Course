@@ -12,10 +12,14 @@
 
 CThreePoint::CThreePoint() :CPoint(0, 0), z(0)
 {
+	
 }
 
 CThreePoint::CThreePoint(int px, int py, int pz) :CPoint(px, py), z(pz)
 {
+	cout << "A point in the space: ";
+	ShowPoint();
+	cout << "created";
 }
 
 int CThreePoint::GetZ()
@@ -30,5 +34,5 @@ void CThreePoint::SetZ(int pz)
 
 void CThreePoint::ShowPoint()
 {
-	cout << "(" << x << " " << y << " " << z << ")" << endl;
+	cout << "(" << x << "," << y << "," << z << ")" << endl;
 }

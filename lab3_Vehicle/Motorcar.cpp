@@ -9,6 +9,7 @@ Motorcar::Motorcar()
 
 Motorcar::Motorcar(double ms, double w, int sn):Vehicle(ms,w),seatNum(sn)
 {
+	cout << "A motorCar created." << endl;
 }
 
 

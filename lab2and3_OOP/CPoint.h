@@ -17,11 +17,11 @@ public:
 	int GetY()const;
 	void SetX(int);
 	void SetY(int);
-	void ShowPoint();
+	virtual void ShowPoint();
 	static void ShowCount();
 	friend class CLine; // 友元能够访问私有成员
-	friend CPoint operator-(CPoint p1, CPoint p2);
 	CPoint operator+(CPoint pt);
+	friend CPoint operator-(CPoint p1, CPoint p2);
 	friend istream& operator>>(istream& is, CPoint& cp);
 	friend ostream& operator<<(ostream& os, CPoint& cp);
 };

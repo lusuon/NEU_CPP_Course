@@ -2,10 +2,42 @@
 using namespace Eigen; 
 #include <map>
 #include <set>
-#include <vector>
 #include <iostream>
+#include <fstream>
 using namespace std;
 #include "DecisionTree.h"
+
+/*
+	决策树的实现
+	Jackson Ma
+	2019-06-15
+*/
+
+void DecisionTree::readData(string textName)
+{
+	dataset.resize(24, 5);
+	ifstream inf(textName);
+	int row = 0;
+	string lineStr;
+	while (getline(inf, lineStr))
+	{
+		// 打印整行字符串
+		cout << lineStr << endl;
+		// 存成二维表结构
+		stringstream ss(lineStr);
+		string str;
+		// 按照逗号分隔
+		int col = 0;
+		while (getline(ss, str, ','))
+		{
+			dataset(row, col) = str;
+			col++;
+		}
+		row++;
+	}
+	cout << dataset;
+	cout << endl << "End reading";
+}
 
 
 // 删除矩阵的指定行
@@ -208,29 +240,30 @@ TreeNode* DecisionTree::createTree(Matrix<string, Dynamic, Dynamic> dataset, Mat
 	return myTree;
 }
 
-string DecisionTree::classify(TreeNode* tree, Matrix<string, Dynamic, 1> featLabels, Matrix<string, Dynamic, Dynamic> testVec)
+string DecisionTree::classify(TreeNode* tree, Matrix<string, Dynamic, 1> featLabels, Matrix<string, 1, Dynamic> testVec)
 {
 	string classLabel; // 初始化返回标签结果
-
-	string first_child_decision = tree->getChilds.begin()->first;
-	TreeNode* first_child = tree->getChilds.begin()->second;
+	string decision = tree->getDecision();
+	map<string,TreeNode*> childs= tree->getChilds();
+	// 获取当前树决策标签在数据集内的列位置
 	int featIndex = -1;
 	for (int r = 0; r < featLabels.rows(); r++)
 	{
-		if (featLabels(r, 0) == first_child_decision)
+		if (featLabels(r, 0) == decision)
 		{
 			featIndex = r;
 			break;
 		}
 	}
-	map<string, TreeNode*> childs = tree->getChilds();
+
 	for (map<string, TreeNode*>::iterator it = childs.begin(); it != childs.end(); it++)
 	{
-		if (testVec(featIndex, 0) == (*it).first)
+		// testVec的特征值符合决策树子节点的decision标签
+		if (testVec(0, featIndex) == (*it).first)
 		{
-			string key = "";
-			//if ((*it).second->getChilds.size() != 0) classLabel = classify(first_child[key], featLabels, testVec);
-			//else classLabel = "";// 决策
+			//对应节点仍有其子节点，说明为中间节点，在该点递归调用本函数
+			if ((*it).second->getChilds().size() != 0) classLabel = classify((*it).second, featLabels, testVec);
+			else classLabel = (*it).second->getDecision();// 决策
 		}
 	}
 	return classLabel;
@@ -247,12 +280,16 @@ ostream& operator<<(ostream& os, TreeNode tn)
 	return os;
 }
 
+Matrix<string, Dynamic, Dynamic> DecisionTree::getDataset() {
+	return dataset;
+}
 
 void main()
 {
 	DecisionTree dt;
-	Matrix<string, 2, 1> labels;
+	Matrix<string, 4, 1> labels;
 	Matrix<string, Dynamic, Dynamic> ds;
+	/*
 	labels << "No_Surfacing", "Flippers";
 	ds.resize(5, 3);
 	ds<< to_string(1), to_string(1), to_string(1),
@@ -262,5 +299,16 @@ void main()
 		to_string(0), to_string(1), to_string(0);
 	//cout << ds;
 	TreeNode* tree = dt.createTree(ds,labels);
-	cout << *tree;
+	cout << *tree << endl;
+	Matrix<string, 2, 1> testVec;
+	testVec << "1", "0";
+	cout << "result:" << dt.classify(tree, labels, testVec);
+	*/
+	dt.readData("lense.csv");
+	labels << "age", "prescript","astigmatic","tearRate";
+	TreeNode* tree = dt.createTree(dt.getDataset(), labels);
+	cout << *tree << endl;
+	Matrix<string, 4, 1> testvec;
+	testvec << "young", "myope", "no", "reduced";
+	cout<<"The test result is:"<<dt.classify(tree, labels,testvec);
 }

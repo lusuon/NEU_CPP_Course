@@ -45,15 +45,12 @@ void write(string text,string path)
 	out.close();
 }
 
-/*
 
-//int argc, char* argv[]
-void main()
+void main(int argc, char* argv[])
 {
-	string read_tar = toReadPath;//argv[1];
-	string write_tar = toWritePath;//argv[2];
+	string read_tar = argv[1];//toReadPath;//
+	string write_tar = argv[2]; //toWritePath;//
 	read(read_tar);
 	write(content,write_tar);
 }
 
-*/

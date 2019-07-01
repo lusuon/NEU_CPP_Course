@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SVM.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="OptStruct.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DecisionTree.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -29,17 +23,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SVM.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="OptStruct.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="DecisionTree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TreeNode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lense.csv">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

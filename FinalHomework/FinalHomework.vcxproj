@@ -20,15 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DecisionTree.h" />
-    <ClInclude Include="OptStruct.h" />
-    <ClInclude Include="SVM.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DecisionTree.cpp" />
-    <ClCompile Include="OptStruct.cpp" />
-    <ClCompile Include="SVM.cpp" />
     <ClCompile Include="TreeNode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lense.csv" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

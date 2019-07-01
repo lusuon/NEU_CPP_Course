@@ -20,6 +20,7 @@ class Classifier
 private:
 	int rows = 0;
 	int attr_nums = 0;
+	//double[][] hessian;
 	vector< vector<double> > data; 
 	
 	double sigmoid(double z);//sigmoid函数，将输入数字映射到(0，1)之间
@@ -31,6 +32,9 @@ private:
 	vector< vector<double> > update_weights(vector< vector<double> > weights, vector< vector<double> > error); // 迭代更新weight
 	vector< vector<double> > transcope(vector< vector<double> > matrix); //矩阵转置
 	vector< vector <double> > classify(vector< vector <double> > raw); // 将sigmoid函数处理后的数据转化为0，1的标签
+
+	// 0617
+	void hessian();
 public:
 	vector< vector <double> > weights; // 权重
 	vector< vector<double> > train_data; //训练集数据
@@ -48,4 +52,6 @@ public:
 	void devide_train_test();//将已有的数据集划分为训练集，测试集
 	void test();//进行测试
 	double check(vector< vector <double> > origin_labels, vector< vector <double> > classified_labels); // 计算分类的正确率
+
+	void newtonTrain();
 };

@@ -25,3 +25,8 @@ map<string, TreeNode*> TreeNode::getChilds()
 {
 	return childs;
 }
+
+string TreeNode::getDecision()
+{
+	return decision;
+}

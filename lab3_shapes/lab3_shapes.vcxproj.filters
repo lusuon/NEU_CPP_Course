@@ -15,27 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\lab2and3_OOP\Shape.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\lab2and3_OOP\ShapeLine.cpp">
+    <ClCompile Include="ShapeLine.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\lab2and3_OOP\CCircle.cpp">
+    <ClCompile Include="Shape.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CRectangle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CCircle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\lab2and3_OOP\Shape.h">
+    <ClInclude Include="CCircle.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\lab2and3_OOP\ShapeLine.h">
+    <ClInclude Include="Shape.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\lab2and3_OOP\CCircle.h">
+    <ClInclude Include="ShapeLine.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CRectangle.h">

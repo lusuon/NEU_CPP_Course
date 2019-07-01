@@ -129,6 +129,7 @@
     <ClCompile Include="CLine.cpp" />
     <ClCompile Include="CPoint.cpp" />
     <ClCompile Include="CThreePoint.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLine.h" />

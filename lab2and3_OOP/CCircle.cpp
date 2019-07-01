@@ -17,3 +17,7 @@ void CCircle::draw()
 {
 	cout << " This is a circle!" << endl;
 }
+
+CCircle::CCircle(double)
+{
+}

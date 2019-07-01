@@ -1,8 +1,8 @@
-#include "ShapeLine.h"
 #include <iostream>
+#include "ShapeLine.h"
 using namespace std;
 
-ShapeLine::ShapeLine()
+ShapeLine::ShapeLine(ColorType c, double s, double e):ColorType(c),start(s),end(e)
 {
 }
 
