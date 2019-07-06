@@ -6,6 +6,9 @@ using namespace Eigen;
 #include <fstream>
 using namespace std;
 #include "DecisionTree.h"
+#include "tool.h"
+
+//constexpr auto TRAIN_RATE = 0.9;
 
 /*
 	决策树的实现
@@ -13,32 +16,29 @@ using namespace std;
 	2019-06-15
 */
 
-void DecisionTree::readData(string textName)
-{
-	dataset.resize(24, 5);
-	ifstream inf(textName);
-	int row = 0;
-	string lineStr;
-	while (getline(inf, lineStr))
-	{
-		// 打印整行字符串
-		cout << lineStr << endl;
-		// 存成二维表结构
-		stringstream ss(lineStr);
-		string str;
-		// 按照逗号分隔
-		int col = 0;
-		while (getline(ss, str, ','))
-		{
-			dataset(row, col) = str;
-			col++;
-		}
-		row++;
-	}
-	cout << dataset;
-	cout << endl << "End reading";
-}
 
+void preorder(TreeNode* root, int depth)
+{
+	map <string, TreeNode*> c = root->getChilds();
+	cout << (!(c.size()) ? "get result: " : "for attribute: ") << root->getDecision() << endl;
+	depth++;
+	if (c.size())
+	{
+		for (map <string, TreeNode*>::iterator it = c.begin(); it != c.end(); it++)
+		{
+			int i = 0;
+			while (i < depth)
+			{
+				if (i < depth - 1) cout << ("\t");
+				else cout << "|——";
+				i++;
+			}
+			cout << "if " << (*it).first << ":";
+			preorder((*it).second, depth);
+		}
+	}
+	else return;
+}
 
 // 删除矩阵的指定行
 Matrix<string, Dynamic, Dynamic> removeRow(Matrix<string, Dynamic, Dynamic> matrix, int rowToRemove)
@@ -57,13 +57,14 @@ bool isAllElementTheSame(Matrix<string, Dynamic, Dynamic> m)
 {
 	set<string> checkSet;
 	for (string *p = m.data(); p < m.data() + m.size(); p++) checkSet.insert(*p);
-
-	//for (set<string>::iterator it = checkSet.begin(); it != checkSet.end(); it++) cout << *it;
 	return checkSet.size() == 1;
 }
 
-DecisionTree::DecisionTree()
+DecisionTree::DecisionTree(Matrix<string, Dynamic, Dynamic> d,Matrix<string,1,Dynamic> l)
 {
+	labels = l;
+	dataset = d;
+	createTree();
 }
 
 DecisionTree::~DecisionTree()
@@ -77,8 +78,6 @@ double DecisionTree::calcShannonEnt(Matrix<string, Dynamic, Dynamic> dataset)
 	int datasetCols = dataset.cols();
 	map<string, int> labelCounts;
 	// 最后一列 m*1 的标签向量
-	//cout << numEntries << endl;
-	//cout << datasetCols << endl;
 	Matrix<string, Dynamic, 1> labels = dataset.col(datasetCols-1);
 	for (int i = 0; i < numEntries; i++)
 	{
@@ -99,9 +98,6 @@ double DecisionTree::calcShannonEnt(Matrix<string, Dynamic, Dynamic> dataset)
 //在指定列上根据给定值对数据集进行划分：选出符合指定列要求值的部分，并删去指定列
 Matrix<string, Dynamic, Dynamic> DecisionTree::splitDataSet(Matrix<string, Dynamic, Dynamic> d, int axis, string value)
 {
-	//cout << d << endl;
-	//cout << "find in: "<< axis << endl;
-	//cout << "need satisfy: "<< value << endl;
 	Matrix<string, Dynamic, Dynamic> splitted_dataset;
 	splitted_dataset.resize(d.rows(), d.cols() - 1);
 	int new_col_count = 0;
@@ -122,8 +118,6 @@ Matrix<string, Dynamic, Dynamic> DecisionTree::splitDataSet(Matrix<string, Dynam
 			if (new_col_count != 0) new_row_count++;
 		}
 	}
-	//cout << "the splitted dataset is:" << endl << splitted_dataset.middleRows(0, new_row_count) << endl;
-	//cout << "the splitted dataset's middle row is:" << endl << splitted_dataset.middleRows(0, new_row_count) << endl;
 	return splitted_dataset.middleRows(0, new_row_count);
 	//return splitted_dataset;
 }
@@ -144,8 +138,6 @@ int DecisionTree::chooseBestFeatureToSplit(Matrix<string, Dynamic, Dynamic> data
 		double newEntropy = 0;
 		for (set<string>::iterator it = col_feature_value_set.begin(); it != col_feature_value_set.end(); ++it)
 		{
-			//cout << "For calculating the entropy, split dataset:" << endl;
-			//cout << dataset << endl;
 			Matrix<string, Dynamic, Dynamic> subDataSet = splitDataSet(dataset, i, *it);
 			double prob = double(subDataSet.rows()) / double(dataset.rows());
 			newEntropy += prob * calcShannonEnt(subDataSet);
@@ -161,7 +153,7 @@ int DecisionTree::chooseBestFeatureToSplit(Matrix<string, Dynamic, Dynamic> data
 	return bestFeature;
 }
 
-// 未测试，决定传入类标签中出现次数最多的标签
+// 未决定传入类标签中出现次数最多的标签
 string DecisionTree::majorityCnt(Array<string,Dynamic,1> classList)
 {
 	// 计算各种标签出现次数的map，对各标签进行计数
@@ -189,7 +181,6 @@ string DecisionTree::majorityCnt(Array<string,Dynamic,1> classList)
 	return maxp.first;
 }
 
-
 // labels为列对应的特征名
 TreeNode* DecisionTree::createTree(Matrix<string, Dynamic, Dynamic> dataset, Matrix<string, Dynamic, 1> labels)
 {
@@ -197,28 +188,18 @@ TreeNode* DecisionTree::createTree(Matrix<string, Dynamic, Dynamic> dataset, Mat
 	Matrix<string, Dynamic, 1> classList = dataset.rightCols(1); 
 	// 递归边界条件一：标签完全相同，不再划分，返回该标签（string)构成的叶节点
 	if (isAllElementTheSame(classList)) {
-		//cout << "all the same,got leaf node:" << endl;
-		//TreeNode* temp = &(TreeNode(classList(0,0)));
-		//cout << *temp << endl;
 		TreeNode* leaf =  new TreeNode(classList(0, 0)); //记得释放！！！！！！！！！
 		return leaf;
 	}
 	// 递归边界条件二：遍历完所有特征时，返回出现次数最多的标签(string)构成的叶节点
 	if (dataset.cols() == 1) {
-		//cout << "finish mapping , the vote result:" << endl;
-		//TreeNode temp = TreeNode(majorityCnt(classList));
-		//cout << temp << endl;
 		TreeNode* leaf = new TreeNode(majorityCnt(classList));
 		return leaf;
 	}
 	// 选择数据集中最的最佳划分特征的索引
 	int bestFeat = chooseBestFeatureToSplit(dataset); 
-	// 即 labels[bestFeat];
 	string bestFeatLabel = labels(bestFeat, 0);
-	// cout << "The bestFeatLabel is :"<<bestFeatLabel<<endl;
-	// 创建空节点；python version:	TreeNode myTree(bestFeatLabel);// { bestFeatLabel: {} };
 	TreeNode* myTree = new TreeNode(bestFeatLabel);
-	//删去labels中第bestFeat位的特征名
 	Matrix<string, Dynamic, 1> new_labels = removeRow(labels,bestFeat); 
 
 	// 得到最佳划分内的所有的feature值——dataset的第bestFeat列
@@ -240,6 +221,13 @@ TreeNode* DecisionTree::createTree(Matrix<string, Dynamic, Dynamic> dataset, Mat
 	return myTree;
 }
 
+void DecisionTree::createTree()
+{
+	//Matrix<string, Dynamic, 1> labels = dataset.topRows(0).transpose();
+	root = createTree(dataset,labels);
+	preorder(root,0);
+}
+
 string DecisionTree::classify(TreeNode* tree, Matrix<string, Dynamic, 1> featLabels, Matrix<string, 1, Dynamic> testVec)
 {
 	string classLabel; // 初始化返回标签结果
@@ -258,7 +246,6 @@ string DecisionTree::classify(TreeNode* tree, Matrix<string, Dynamic, 1> featLab
 
 	for (map<string, TreeNode*>::iterator it = childs.begin(); it != childs.end(); it++)
 	{
-		// testVec的特征值符合决策树子节点的decision标签
 		if (testVec(0, featIndex) == (*it).first)
 		{
 			//对应节点仍有其子节点，说明为中间节点，在该点递归调用本函数
@@ -269,46 +256,36 @@ string DecisionTree::classify(TreeNode* tree, Matrix<string, Dynamic, 1> featLab
 	return classLabel;
 }
 
-ostream& operator<<(ostream& os, TreeNode tn)
+string DecisionTree::classify(Matrix<string, 1, Dynamic> testvec)
 {
-	cout <<tn.decision;
-	if(tn.childs.size()!=0) cout<< ":";
-	for (map<string, TreeNode*>::iterator it = tn.childs.begin(); it != tn.childs.end(); ++it)
-	{
-		cout << "{ '" << (*it).first << "':" << *((*it).second) << "}";
-	}
+	return classify(root, labels, testvec);
+}
+
+double DecisionTree::test()
+{
+	return 0;
+}
+
+
+ostream& operator<<(ostream& os, TreeNode* tn)
+{
+	cout << endl;
+	preorder(tn,0);
 	return os;
 }
+
+
+
+
+
 
 Matrix<string, Dynamic, Dynamic> DecisionTree::getDataset() {
 	return dataset;
 }
 
-void main()
+Matrix<string, Dynamic, 1> DecisionTree::getLabels()
 {
-	DecisionTree dt;
-	Matrix<string, 4, 1> labels;
-	Matrix<string, Dynamic, Dynamic> ds;
-	/*
-	labels << "No_Surfacing", "Flippers";
-	ds.resize(5, 3);
-	ds<< to_string(1), to_string(1), to_string(1),
-		to_string(1), to_string(1), to_string(1),
-		to_string(1), to_string(0), to_string(0),
-		to_string(0), to_string(1), to_string(0),
-		to_string(0), to_string(1), to_string(0);
-	//cout << ds;
-	TreeNode* tree = dt.createTree(ds,labels);
-	cout << *tree << endl;
-	Matrix<string, 2, 1> testVec;
-	testVec << "1", "0";
-	cout << "result:" << dt.classify(tree, labels, testVec);
-	*/
-	dt.readData("lense.csv");
-	labels << "age", "prescript","astigmatic","tearRate";
-	TreeNode* tree = dt.createTree(dt.getDataset(), labels);
-	cout << *tree << endl;
-	Matrix<string, 4, 1> testvec;
-	testvec << "young", "myope", "no", "reduced";
-	cout<<"The test result is:"<<dt.classify(tree, labels,testvec);
+	return this->labels;
 }
+
+

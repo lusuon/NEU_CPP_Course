@@ -20,10 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DecisionTree.h" />
+    <ClInclude Include="Forest.h" />
+    <ClInclude Include="tool.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DecisionTree.cpp" />
+    <ClCompile Include="Forest.cpp" />
+    <ClCompile Include="tool.cpp" />
     <ClCompile Include="TreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
