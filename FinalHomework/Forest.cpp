@@ -54,6 +54,7 @@ void Forest::test()
 		string result = vec(0, vec.cols()-1);
 		if (classify(feature) == result) correct++;
 	}
+	cout << endl;
 	cout << "The total correctness of the random forest: " << correct / (double)test_set.rows();
 }
 
@@ -68,7 +69,6 @@ Forest::Forest(string fnileName,int sf, int tn) :select_feature(sf), tree_nums(t
 	{
 		cout << "A sub tree created: " << endl;
 		DecisionTree* t = new DecisionTree(randomSeperate(base_dataset,base_labels,select_feature), randomLabel(select_feature,base_labels.rows()-1,base_labels));
-		//t->createTree();
 		trees.push_back(t);
 	}
 }
@@ -119,6 +119,10 @@ string Forest::classify(Matrix<string, 1, Dynamic> testvec)
 
 void main()
 {
-	Forest f = Forest("lense.csv", 2, 2);
+	string fn;
+	cout << "Enter the file to be trained. It should be at the same directory, such as ¡¯lense.csv¡®." << "Select 2 featrues and create 2 trees defaulty ." << endl;
+	cin >> fn;
+	Forest f = Forest(fn, 2, 2);
 	f.test();
+	system("pause");
 }

@@ -38,7 +38,7 @@ vector<int> generateRandomInts(int length, int range)
 	return randomInts;
 }
 
-
+//随机选取特征
 Matrix<string,Dynamic,1> randomLabel(int length, int range, Matrix<string, Dynamic, 1> base_labels)
 {
 	set<int> randomInts;
